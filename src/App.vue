@@ -1,60 +1,82 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+  <div id="contaainer">
+    <header>
+      <h1> Desafio Jukebox </h1>
+    </header>
+    <main>
+      <form>
+        <label for="">Nome</label>
+        <input type="text" name="" id="">
+
+        <label for="">Sobrenome</label>
+        <input type="text" name="" id="">
+
+        <label for="">E-mail</label>
+        <input type="text" name="" id="">
+
+        <label for="">Telefone</label>
+        <input type="text" name="" id="">
+
+        <label for="">Pessoa Jurídica ?</label>
+        <input type="checkbox">
+
+        <label for="">CPF/CNPJ</label>
+        <input type="text">
+      </form>
+      <Table :tableValues="concatenatedData"/>
+    </main>
+    <footer>
+      Desafio Jukebox by Kewin Costa
+    </footer>
   </div>
 </template>
 
 <script>
+import Table from './components/shared/table/Table';
+
 export default {
-  name: 'app',
-  data () {
+  components: {
+    'Table' : Table
+  },
+
+  data(){
     return {
-      msg: 'Welcome to Your Vue.js App'
+      personalData: [
+        {
+          name: 'Joao',
+          lastName: 'Vilar',
+          email: 'joao@hotmail.com',
+          telephone: '(21)99878-8878',
+          cpf_cnpj: '00000000000',
+          legalEntity: false
+        },
+        {
+          name: 'Vitor',
+          lastName: 'Costa',
+          email: 'vitinho@hotmail.com',
+          telephone: '(21)99777-8878',
+          cpf_cnpj: '001000103322',
+          legalEntity: false
+        }
+      ]
     }
-  }
+  },
+
+  computed: {
+    concatenatedData(){
+      return this.personalData.map( data =>
+        ({
+          name: `${data.name} ${data.lastName}`,
+          email: data.email,
+          telephone: data.telephone,
+          cpf_cnpj: data.cpf_cnpj,
+        })
+      )
+    }
+  },
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
 </style>
