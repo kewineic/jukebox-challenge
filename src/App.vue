@@ -1,42 +1,39 @@
 <template>
-  <div id="contaainer">
-    <header>
+  <div class="container-primary">
+    <header class="header-container">
       <h1> Desafio Jukebox </h1>
     </header>
-    <main>
-      <form>
-        <label for="">Nome</label>
-        <input type="text" name="" id="">
 
-        <label for="">Sobrenome</label>
-        <input type="text" name="" id="">
-
-        <label for="">E-mail</label>
-        <input type="text" name="" id="">
-
-        <label for="">Telefone</label>
-        <input type="text" name="" id="">
-
-        <label for="">Pessoa Jurídica ?</label>
-        <input type="checkbox">
-
-        <label for="">CPF/CNPJ</label>
-        <input type="text">
+    <main class="main-container">
+      <form class="form-content">
+        <Input labelValue="Nome" inputName="name" inputType="text"/>
+        <Input labelValue="Sobrenome" inputName="lastName" inputType="text"/>
+        <Input labelValue="E-mail" inputName="email" inputType="text"/>
+        <Input labelValue="Telefone" inputName="telephone" inputType="text"/>
+        <Input labelValue="Pessoa Jurídica:" inputName="legalEntity" inputType="checkbox"/>
+        <Input labelValue="CPF" inputName="cpf" inputType="text"/>
+        <Input labelValue="CNPJ" inputName="cnpj" inputType="text"/>
+        <Button buttonType="submit" buttonValue="Salvar"/>
       </form>
-      <Table :tableValues="concatenatedData"/>
+      <Table :tableValues="concatenatedData" />
     </main>
-    <footer>
-      Desafio Jukebox by Kewin Costa
+
+    <footer class="footer-container">
+      Desafio Jukebox &copy; Kewin Costa
     </footer>
   </div>
 </template>
 
 <script>
 import Table from './components/shared/table/Table';
+import Input from './components/shared/input/Input';
+import Button from './components/shared/button/Button';
 
 export default {
   components: {
-    'Table' : Table
+    'Table' : Table,
+    'Input' : Input,
+    'Button' : Button
   },
 
   data(){
@@ -47,7 +44,8 @@ export default {
           lastName: 'Vilar',
           email: 'joao@hotmail.com',
           telephone: '(21)99878-8878',
-          cpf_cnpj: '00000000000',
+          cpf: '00000000000',
+          cnpj: '',
           legalEntity: false
         },
         {
@@ -55,7 +53,8 @@ export default {
           lastName: 'Costa',
           email: 'vitinho@hotmail.com',
           telephone: '(21)99777-8878',
-          cpf_cnpj: '001000103322',
+          cpf: '',
+          cnpj: '001000103322',
           legalEntity: false
         }
       ]
@@ -69,7 +68,8 @@ export default {
           name: `${data.name} ${data.lastName}`,
           email: data.email,
           telephone: data.telephone,
-          cpf_cnpj: data.cpf_cnpj,
+          cpf: data.cpf,
+          cnpj: data.cnpj
         })
       )
     }
@@ -78,5 +78,6 @@ export default {
 </script>
 
 <style>
-
+  @import './assets/css/global.css';
+  @import './assets/css/global-media-queries.css'
 </style>

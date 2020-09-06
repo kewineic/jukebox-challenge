@@ -1,11 +1,12 @@
 <template>
-<table>
+<table class="table-container">
   <thead>
     <tr>
       <th>Nome</th>
       <th>Email</th>
       <th>Telefone</th>
-      <th>CPF/CNPJ</th>
+      <th>CPF</th>
+      <th>CNPJ</th>
     </tr>
   </thead>
   <tbody>
@@ -13,7 +14,8 @@
       <td> {{data.name}} </td>
       <td> {{data.email}} </td>
       <td> {{data.telephone}} </td>
-      <td> {{data.cpf_cnpj}} </td>
+      <td> {{data.cpf}} </td>
+      <td> {{data.cnpj}} </td>
     </tr>
   </tbody>
 </table>
@@ -22,6 +24,10 @@
 <script>
 export default {
   props: {
+    keys: {
+      type: Array,
+      required: true
+    },
     tableValues: {
       type: Array,
       required: true
@@ -35,5 +41,20 @@ export default {
 </script>
 
 <style scoped>
+
+  .table-container {
+    border-collapse: collapse;
+  }
+
+  .table-container th, .table-container td {
+    border: 1px solid black;
+    padding: 5px;
+  }
+
+  .table-container th {
+    background: rgba(0,0,0,.8);
+
+    color: var(--white-default);
+  }
 
 </style>
