@@ -5,15 +5,47 @@
     </header>
 
     <main class="main-container">
-      <form class="form-content">
-        <Input labelValue="Nome" inputName="name" inputType="text"/>
-        <Input labelValue="Sobrenome" inputName="lastName" inputType="text"/>
-        <Input labelValue="E-mail" inputName="email" inputType="text"/>
-        <Input labelValue="Telefone" inputName="telephone" inputType="text"/>
-        <Input labelValue="Pessoa Jurídica:" inputName="legalEntity" inputType="checkbox"/>
-        <Input labelValue="CPF" inputName="cpf" inputType="text"/>
-        <Input labelValue="CNPJ" inputName="cnpj" inputType="text"/>
-        <Button buttonType="submit" buttonValue="Salvar"/>
+      <form class="form-content" @submit.prevent="saveData()">
+
+        <div class="inpur-container">
+          <label for="name" class="form-label">Nome</label>
+          <input v-model="personalData.name" type="text" id="name" class="form-input">
+        </div>
+
+        <div class="inpur-container">
+          <label for="lastName" class="form-label">Sobrenome</label>
+          <input v-model="personalData.lastName" type="text" id="lastName" class="form-input">
+        </div>
+
+        <div class="inpur-container">
+          <label for="email" class="form-label">E-mail</label>
+          <input v-model="personalData.email" type="text" id="email" class="form-input">
+        </div>
+
+        <div class="inpur-container">
+          <label for="telephone" class="form-label">Telefone</label>
+          <input v-model="personalData.telephone" type="text" id="telephone" class="form-input">
+        </div>
+
+        <div class="inpur-container">
+          <label for="legalEntity" class="form-label">Pessoa Jurídica: </label>
+          <input v-model="personalData.legalEntity" type="checkbox" id="legalEntity" class="form-input">
+        </div>
+
+        <div class="inpur-container" v-if="legalEntityVisibility.cpf">
+          <label for="cpf" class="form-label">CPF</label>
+          <input v-model="personalData.cpf" type="text" id="cpf" class="form-input">
+        </div>
+
+        <div class="inpur-container" v-if="legalEntityVisibility.cnpj">
+          <label for="cnpj" class="form-label">CNPJ</label>
+          <input v-model="personalData.cnpj" type="text" id="cnpj" class="form-input">
+        </div>
+
+        <Button
+          buttonType="submit"
+          buttonValue="Salvar"
+        />
       </form>
       <Table :tableValues="concatenatedData" />
     </main>
@@ -26,44 +58,58 @@
 
 <script>
 import Table from './components/shared/table/Table';
-import Input from './components/shared/input/Input';
 import Button from './components/shared/button/Button';
 
 export default {
   components: {
     'Table' : Table,
-    'Input' : Input,
     'Button' : Button
   },
 
   data(){
     return {
-      personalData: [
-        {
-          name: 'Joao',
-          lastName: 'Vilar',
-          email: 'joao@hotmail.com',
-          telephone: '(21)99878-8878',
-          cpf: '00000000000',
-          cnpj: '',
-          legalEntity: false
-        },
-        {
-          name: 'Vitor',
-          lastName: 'Costa',
-          email: 'vitinho@hotmail.com',
-          telephone: '(21)99777-8878',
-          cpf: '',
-          cnpj: '001000103322',
-          legalEntity: false
-        }
-      ]
+      test: '',
+      personalData: {
+        name: '',
+        lastName: '',
+        email: '',
+        telephone: '',
+        cpf: '',
+        cnpj: '',
+        legalEntity: false
+      },
+
+      legalEntityVisibility: {
+        cpf: true,
+        cnpj: false
+      },
+
+      savedPersonalData: []
+    }
+  },
+
+  methods: {
+    saveData(){
+
+      this.savedPersonalData.push({
+        ...this.personalData
+      });
+
+      this.personalData = {
+        name: '',
+        lastName: '',
+        email: '',
+        telephone: '',
+        cpf: '',
+        cnpj: '',
+        legalEntity: ''
+      }
     }
   },
 
   computed: {
     concatenatedData(){
-      return this.personalData.map( data =>
+      return this.savedPersonalData.map( data =>
         ({
           name: `${data.name} ${data.lastName}`,
           email: data.email,
@@ -74,6 +120,18 @@ export default {
       )
     }
   },
+
+  watch: {
+    'personalData.legalEntity' : function (value) {
+      if(value === true) {
+        this.legalEntityVisibility.cpf = false
+        this.legalEntityVisibility.cnpj = true
+      } else {
+        this.legalEntityVisibility.cpf = true
+        this.legalEntityVisibility.cnpj = false
+      }
+    }
+  }
 }
 </script>
 
