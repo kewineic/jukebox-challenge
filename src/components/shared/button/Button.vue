@@ -12,7 +12,7 @@ export default {
   props: {
     buttonType: {
       type: String,
-      required: true
+      required: false
     },
     buttonValue: {
       type: String,

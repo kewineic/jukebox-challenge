@@ -7,52 +7,59 @@
     <main class="main-container">
       <form class="form-content" @submit.prevent="saveData()">
 
-        <div class="inpur-container">
+        <div class="input-container">
           <label for="name" class="form-label">Nome</label>
-          <input v-model="personalData.name" type="text" id="name" class="form-input">
+          <input v-model="personalData.name" type="text" id="name" class="form-input" required>
         </div>
 
-        <div class="inpur-container">
+        <div class="input-container">
           <label for="lastName" class="form-label">Sobrenome</label>
-          <input v-model="personalData.lastName" type="text" id="lastName" class="form-input">
+          <input v-model="personalData.lastName" type="text" id="lastName" class="form-input" required>
         </div>
 
-        <div class="inpur-container">
+        <div class="input-container">
           <label for="email" class="form-label">E-mail</label>
-          <input v-model="personalData.email" type="text" id="email" class="form-input">
+          <input v-model="personalData.email" type="text" id="email" class="form-input" required>
         </div>
 
-        <div class="inpur-container">
+        <div class="input-container">
           <label for="telephone" class="form-label">Telefone</label>
-          <input v-model="personalData.telephone" type="text" id="telephone" class="form-input">
+          <input v-model="personalData.telephone" type="text" id="telephone" class="form-input" required>
         </div>
 
-        <div class="inpur-container">
-          <label for="legalEntity" class="form-label">Pessoa Jurídica: </label>
-          <input v-model="personalData.legalEntity" type="checkbox" id="legalEntity" class="form-input">
+        <div class="input-container checkbox-container">
+          <input v-model="personalData.legalEntity" type="checkbox" id="legalEntity" class="form-checkbox">
+          <label for="legalEntity" class="form-label-checkbox">Pessoa Jurídica </label>
         </div>
 
-        <div class="inpur-container" v-if="legalEntityVisibility.cpf">
+        <div class="input-container" v-if="legalEntityVisibility.cpf">
           <label for="cpf" class="form-label">CPF</label>
-          <input v-model="personalData.cpf" type="text" id="cpf" class="form-input">
+          <input v-model="personalData.cpf" type="text" id="cpf" class="form-input" required>
         </div>
 
-        <div class="inpur-container" v-if="legalEntityVisibility.cnpj">
+        <div class="input-container" v-if="legalEntityVisibility.cnpj">
           <label for="cnpj" class="form-label">CNPJ</label>
-          <input v-model="personalData.cnpj" type="text" id="cnpj" class="form-input">
+          <input v-model="personalData.cnpj" type="text" id="cnpj" class="form-input" required>
         </div>
 
-        <Button
-          buttonType="submit"
-          buttonValue="Salvar"
-        />
+        <div class="input-container">
+          <Button
+            buttonType="submit"
+            buttonValue="Salvar"
+          />
+        </div>
       </form>
-      <Table :tableValues="concatenatedData" />
+      <Table
+        :tableValues="concatenatedData"
+        @buttonEditActivated="editData"
+        @buttonDeleteActivated="deleteData"
+      />
     </main>
 
     <footer class="footer-container">
       Desafio Jukebox &copy; Kewin Costa
     </footer>
+
   </div>
 </template>
 
@@ -68,7 +75,7 @@ export default {
 
   data(){
     return {
-      test: '',
+      editingData : false,
       personalData: {
         name: '',
         lastName: '',
@@ -91,9 +98,14 @@ export default {
   methods: {
     saveData(){
 
-      this.savedPersonalData.push({
-        ...this.personalData
-      });
+      if(this.editingData){
+        this.savedPersonalData.splice(0, 1, {...this.personalData});
+        this.editingData = false;
+      } else {
+        this.savedPersonalData.push({
+          ...this.personalData
+        });
+      }
 
       this.personalData = {
         name: '',
@@ -104,6 +116,23 @@ export default {
         cnpj: '',
         legalEntity: ''
       }
+    },
+
+    editData(index){
+      this.personalData = {
+        name: this.savedPersonalData[index].name,
+        lastName: this.savedPersonalData[index].lastName,
+        email: this.savedPersonalData[index].email,
+        telephone: this.savedPersonalData[index].telephone,
+        cpf: this.savedPersonalData[index].cpf,
+        cnpj: this.savedPersonalData[index].cnpj,
+        legalEntity: this.savedPersonalData[index].legalEntity
+      },
+      this.editingData = true;
+    },
+
+    deleteData(index){
+      this.savedPersonalData.splice(index, 1)
     }
   },
 
