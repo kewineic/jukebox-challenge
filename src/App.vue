@@ -34,12 +34,12 @@
 
         <div class="input-container" v-if="legalEntityVisibility.cpf">
           <label for="cpf" class="form-label">CPF</label>
-          <input v-model="personalData.cpf" type="text" id="cpf" class="form-input" required>
+          <input v-model="personalData.identity" type="text" id="cpf" class="form-input" required>
         </div>
 
         <div class="input-container" v-if="legalEntityVisibility.cnpj">
           <label for="cnpj" class="form-label">CNPJ</label>
-          <input v-model="personalData.cnpj" type="text" id="cnpj" class="form-input" required>
+          <input v-model="personalData.identity" type="text" id="cnpj" class="form-input" required>
         </div>
 
         <div class="input-container">
@@ -75,14 +75,17 @@ export default {
 
   data(){
     return {
-      editingData : false,
+      editingData : {
+        index: 0,
+        isEditing: false
+      },
+
       personalData: {
         name: '',
         lastName: '',
         email: '',
         telephone: '',
-        cpf: '',
-        cnpj: '',
+        identity: '',
         legalEntity: false
       },
 
@@ -97,10 +100,9 @@ export default {
 
   methods: {
     saveData(){
-
-      if(this.editingData){
-        this.savedPersonalData.splice(0, 1, {...this.personalData});
-        this.editingData = false;
+      if(this.editingData.isEditing){
+        this.savedPersonalData.splice(this.editingData.index, 1, {...this.personalData});
+        this.editingData.isEditing = false;
       } else {
         this.savedPersonalData.push({
           ...this.personalData
@@ -119,16 +121,11 @@ export default {
     },
 
     editData(index){
-      this.personalData = {
-        name: this.savedPersonalData[index].name,
-        lastName: this.savedPersonalData[index].lastName,
-        email: this.savedPersonalData[index].email,
-        telephone: this.savedPersonalData[index].telephone,
-        cpf: this.savedPersonalData[index].cpf,
-        cnpj: this.savedPersonalData[index].cnpj,
-        legalEntity: this.savedPersonalData[index].legalEntity
-      },
-      this.editingData = true;
+      this.personalData = {...this.savedPersonalData[index] }
+      this.editingData = {
+        index,
+        isEditing : true,
+      };
     },
 
     deleteData(index){
@@ -143,8 +140,7 @@ export default {
           name: `${data.name} ${data.lastName}`,
           email: data.email,
           telephone: data.telephone,
-          cpf: data.cpf,
-          cnpj: data.cnpj
+          identity: data.identity
         })
       )
     }

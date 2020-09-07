@@ -5,8 +5,7 @@
       <th>Nome</th>
       <th>Email</th>
       <th>Telefone</th>
-      <th>CPF</th>
-      <th>CNPJ</th>
+      <th>CPF/CNPJ</th>
     </tr>
   </thead>
   <tbody>
@@ -14,8 +13,7 @@
       <td> {{value.name}} </td>
       <td> {{value.email}} </td>
       <td> {{value.telephone}} </td>
-      <td> {{value.cpf}} </td>
-      <td> {{value.cnpj}} </td>
+      <td> {{value.identity}} </td>
 
       <div class="td-handle-content">
         <button
