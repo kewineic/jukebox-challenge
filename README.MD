@@ -1,12 +1,5 @@
 # Desafio Jukebox Agenciamento.
 
-### [Aplicativo no Heroku](https://pokestore-desafio-b2w.herokuapp.com/)
-
-<a href="https://pokestore-desafio-b2w.herokuapp.com/"> </a>
-
-## Assista ao vídeo de demonstração: <br>
-[![Vídeo de demonstração Desafio-Jukebox: Teste de Proficiência Jukebox.](http://img.youtube.com/vi/Q1sWkCV0rdk/0.jpg)](http://www.youtube.com/watch?v=Q1sWkCV0rdk "Vídeo de demonstração PokeStore: Desafio Loja Pokemon.")
-
 ## Resumo:
 Teste de Proficiência para a empresa Jukebox Agenciamento utilizando VueJs.
 
