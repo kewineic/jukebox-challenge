@@ -1,5 +1,9 @@
 # Desafio Jukebox Agenciamento.
 
+## Vídeo demonstração
+
+[![Vídeo demonstração](http://img.youtube.com/vi/d5zWHtej5fs/0.jpg)](http://www.youtube.com/watch?v=d5zWHtej5fs "Vídeo demonstração")
+
 ## Resumo:
 Teste de Proficiência para a empresa Jukebox Agenciamento utilizando VueJs.
 
