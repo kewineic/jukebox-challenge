@@ -63,7 +63,11 @@ export default {
     border-collapse: collapse;
 
     table-layout: fixed;
-    width:100%;
+    width: 100%;
+    max-width: 1000px;
+
+    margin-bottom: 70px;
+    margin-left: 10%;
   }
 
   .table-container th, .table-container td {
@@ -115,5 +119,14 @@ export default {
      width: 1.5rem;
      margin-left: 10px;
    }
+
+  @media (max-width: 600px) {
+    .table-container {
+      width: 80%;
+      margin-left: 10%;
+    }
+
+
+  }
 
 </style>
