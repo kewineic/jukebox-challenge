@@ -64,24 +64,11 @@ export default {
     max-width: 940px;
     margin: 3rem auto 5rem auto;
   }
-  
+
   .td-handle-content button{
     background: transparent;
     border: none;
     outline: none;
-    opacity: 30%;
-
-    transition: .3s;
-  }
-
-  .td-handle-content button:hover {
-    cursor: pointer;
-    opacity: 70%;
-  }
-
-  .td-handle-content button:active {
-    opacity: 100%;
-    box-shadow: 0 2px 0 rgba(0,0,0,.5);
   }
 
   .v-icon {
