@@ -1,76 +1,88 @@
 <template>
-  <div class="container-primary">
-    <header class="header-container">
-      <h1> Desafio Jukebox </h1>
-    </header>
+  <v-app >
+    <Header /> 
 
-    <main class="main-container">
-      <form class="form-content" @submit.prevent="saveData()">
+    <v-main>
+      <v-container>
+        <form @submit.prevent="saveData()" class="form-container">
+          <v-text-field
+            v-model="personalData.name"
+            label="Nome"
+            required
+          ></v-text-field>
 
-        <div class="input-container">
-          <label for="name" class="form-label">Nome</label>
-          <input v-model="personalData.name" type="text" id="name" class="form-input" required>
-        </div>
+          <v-text-field
+            v-model="personalData.lastName"
+            label="Sobrenome"
+            required
+          ></v-text-field>
 
-        <div class="input-container">
-          <label for="lastName" class="form-label">Sobrenome</label>
-          <input v-model="personalData.lastName" type="text" id="lastName" class="form-input" required>
-        </div>
+          <v-text-field
+            v-model="personalData.email"
+            label="E-mail"
+            required
+          ></v-text-field>
 
-        <div class="input-container">
-          <label for="email" class="form-label">E-mail</label>
-          <input v-model="personalData.email" type="text" id="email" class="form-input" required>
-        </div>
+          <v-text-field
+            v-model="personalData.telephone"
+            label="Telefone"
+            required
+          ></v-text-field>
 
-        <div class="input-container">
-          <label for="telephone" class="form-label">Telefone</label>
-          <input v-model="personalData.telephone" type="text" id="telephone" class="form-input" required>
-        </div>
+          <v-checkbox
+            v-model="personalData.legalEntity"
+            label="Pessoa Jurídica"
+            type="checkbox"
+          ></v-checkbox>
 
-        <div class="input-container checkbox-container">
-          <input v-model="personalData.legalEntity" type="checkbox" id="legalEntity" class="form-checkbox">
-          <label for="legalEntity" class="form-label-checkbox">Pessoa Jurídica </label>
-        </div>
+          <v-text-field
+            v-model="personalData.identity"
+            label="CPF"
+            required
+            v-if="legalEntityVisibility.cpf"
+          ></v-text-field>
 
-        <div class="input-container" v-if="legalEntityVisibility.cpf">
-          <label for="cpf" class="form-label">CPF</label>
-          <input v-model="personalData.identity" type="text" id="cpf" class="form-input" required>
-        </div>
+          <v-text-field
+            v-model="personalData.identity"
+            label="CNPJ"
+            required
+            v-if="legalEntityVisibility.cnpj"
+          ></v-text-field>
 
-        <div class="input-container" v-if="legalEntityVisibility.cnpj">
-          <label for="cnpj" class="form-label">CNPJ</label>
-          <input v-model="personalData.identity" type="text" id="cnpj" class="form-input" required>
-        </div>
+          <v-container>
+            <Button
+              buttonType="submit"
+              buttonValue="Salvar"
+            />
+          </v-container>
+        </form>
+      </v-container>
+      
+      <v-container>
+        <Table
+          :tableValues="concatenatedData"
+          @buttonEditActivated="editData"
+          @buttonDeleteActivated="deleteData"
+        />
+      </v-container>
+    </v-main>
 
-        <div class="input-container">
-          <Button
-            buttonType="submit"
-            buttonValue="Salvar"
-          />
-        </div>
-      </form>
-      <Table
-        :tableValues="concatenatedData"
-        @buttonEditActivated="editData"
-        @buttonDeleteActivated="deleteData"
-      />
-    </main>
-
-    <footer class="footer-container">
-      Desafio Jukebox &copy; Kewin Costa
-    </footer>
-
-  </div>
+    <Footer /> 
+  </v-app>
 </template>
 
 <script>
+import Header from './components/shared/header/Header';
+import Footer from './components/shared/footer/Footer';
 import Table from './components/shared/table/Table';
 import Button from './components/shared/button/Button';
 
 export default {
   components: {
-    'Table' : Table,
-    'Button' : Button
+    Table,
+    Button,
+    Header,
+    Footer
   },
 
   data(){
@@ -161,6 +173,11 @@ export default {
 </script>
 
 <style>
-  @import './assets/css/global.css';
-  @import './assets/css/global-media-queries.css'
+
+  .container .form-container{
+    max-width: 400px;
+    text-align: center;
+    margin: auto;
+  }
+  
 </style>

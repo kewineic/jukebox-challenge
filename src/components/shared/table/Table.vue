@@ -1,36 +1,36 @@
 <template>
-<table class="table-container">
-  <thead>
-    <tr>
-      <th>Nome</th>
-      <th>Email</th>
-      <th>Telefone</th>
-      <th>CPF/CNPJ</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-bind:key="index" v-for="(value, index) of tableValues">
-      <td> {{value.name}} </td>
-      <td> {{value.email}} </td>
-      <td> {{value.telephone}} </td>
-      <td> {{value.identity}} </td>
-
-      <div class="td-handle-content">
-        <button
-          @click="triggerEditAction(index)"
-        ><img src='../../../assets/icons/edit-icon.svg'></button>
-        <button
-          @click="triggerDeleteAction(index)"
-        ><img src='../../../assets/icons/delete-icon.svg'></button>
-      </div>
-    </tr>
-  </tbody>
-</table>
+    <v-simple-table light >
+      <template v-slot:default>
+        <thead>
+          <tr>
+            <th class="text-left">Name</th>
+            <th class="text-left">E-mail</th>
+            <th class="text-left">Telefone</th>
+            <th class="text-left">CPF/CNPJ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-bind:key="index" v-for="(value, index) of tableValues">
+            <td> {{value.name}} </td>
+            <td> {{value.email}} </td>
+            <td> {{value.telephone}} </td>
+            <td> {{value.identity}} </td>
+            
+            <v-container class="td-handle-content">
+              <button
+                @click="triggerEditAction(index)"
+              ><img src='../../../assets/icons/edit-icon.svg'></button>
+              <button
+                @click="triggerDeleteAction(index)"
+              ><img src='../../../assets/icons/delete-icon.svg'></button>
+              </v-container>
+          </tr>
+        </tbody>
+      </template>
+    </v-simple-table>
 </template>
 
 <script>
-
-import Button from '../button/Button';
 
 export default {
   props: {
@@ -38,10 +38,6 @@ export default {
       type: Array,
       required: true
     }
-  },
-
-  components: {
-    'Button' : Button
   },
 
   methods: {
@@ -58,42 +54,10 @@ export default {
 </script>
 
 <style scoped>
+  .v-data-table {
 
-  .table-container {
-    border-collapse: collapse;
-
-    table-layout: fixed;
-    width: 100%;
-    max-width: 1000px;
-
-    margin-bottom: 70px;
-    margin-left: 10%;
-  }
-
-  .table-container th, .table-container td {
-    border: 1px solid black;
-    padding: 5px;
-    overflow: auto;
-
-    min-height: 3rem;
-
-    white-space:pre-line;
-  }
-
-  .table-container th {
-    background: rgba(0,0,0,.8);
-
-    color: var(--white-default);
-  }
-
-  .td-handle-content {
-    display: flex;
-    flex-direction: row;
-    align-content: space-between;
-
-    margin: auto;
-    margin-left: 5px;
-
+    max-width: 940px;
+    margin: 3rem auto 5rem auto;
   }
 
   .td-handle-content button{
@@ -115,18 +79,9 @@ export default {
     box-shadow: 0 2px 0 rgba(0,0,0,.5);
   }
 
-   .td-handle-content img{
-     width: 1.5rem;
-     margin-left: 10px;
-   }
-
-  @media (max-width: 600px) {
-    .table-container {
-      width: 80%;
-      margin-left: 10%;
-    }
-
-
+  .td-handle-content img{
+    width: 1.5rem;
+    margin-left: 10px;
   }
 
 </style>
