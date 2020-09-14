@@ -173,7 +173,6 @@ export default {
 </script>
 
 <style>
-
   .container .form-container{
     max-width: 400px;
     text-align: center;
