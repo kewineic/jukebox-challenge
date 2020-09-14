@@ -5,6 +5,8 @@
     <v-main>
       <v-container>
         <form @submit.prevent="saveData()" class="form-container">
+
+          <v-icon>fas fa-edit</v-icon>
           <v-text-field
             v-model="personalData.name"
             label="Nome"

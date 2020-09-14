@@ -19,10 +19,15 @@
             <v-container class="td-handle-content">
               <button
                 @click="triggerEditAction(index)"
-              ><img src='../../../assets/icons/edit-icon.svg'></button>
+              >
+                <v-icon>fas fa-edit</v-icon>
+              </button>
+
               <button
                 @click="triggerDeleteAction(index)"
-              ><img src='../../../assets/icons/delete-icon.svg'></button>
+              > 
+                <v-icon>fas fa-trash</v-icon>
+              </button>
               </v-container>
           </tr>
         </tbody>
@@ -59,7 +64,7 @@ export default {
     max-width: 940px;
     margin: 3rem auto 5rem auto;
   }
-
+  
   .td-handle-content button{
     background: transparent;
     border: none;
@@ -79,9 +84,9 @@ export default {
     box-shadow: 0 2px 0 rgba(0,0,0,.5);
   }
 
-  .td-handle-content img{
+  .v-icon {
     width: 1.5rem;
-    margin-left: 10px;
+    margin-left: .8rem;
   }
 
 </style>
