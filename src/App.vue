@@ -29,6 +29,7 @@
             v-model="personalData.telephone"
             label="Telefone"
             required
+            v-mask="'(##) #####-####'"
           ></v-text-field>
 
           <v-checkbox
@@ -42,6 +43,7 @@
             label="CPF"
             required
             v-if="legalEntityVisibility.cpf"
+            v-mask="'###.###.###-##'"
           ></v-text-field>
 
           <v-text-field
@@ -49,6 +51,7 @@
             label="CNPJ"
             required
             v-if="legalEntityVisibility.cnpj"
+            v-mask="'##.###.###/####-##'"
           ></v-text-field>
 
           <v-container>

@@ -1,3 +1,5 @@
+import { cpf, cnpj  } from 'cpf-cnpj-validator'; 
+
 export const saveDataMixin = {
   methods: {
     saveData(){
@@ -11,6 +13,9 @@ export const saveDataMixin = {
         identity: '',
         legalEntity: false
       }
+
+      console.log(cpf.isValid("142.030.397-03"));
+      console.log(cnpj.isValid("37.410.584/0001-83"));
     }
   }
 }
@@ -23,7 +28,6 @@ export const editDataMixin = {
       this.$refs.name.focus();
     }
   }
-
 }
 
 export const deleteDataMixin =  {
