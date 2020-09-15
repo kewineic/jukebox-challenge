@@ -20,13 +20,13 @@
               <button
                 @click="triggerEditAction(index)"
               >
-                <v-icon>fas fa-edit</v-icon>
+                <v-icon size="20">fas fa-edit</v-icon>
               </button>
 
               <button
                 @click="triggerDeleteAction(index)"
               > 
-                <v-icon>fas fa-trash</v-icon>
+                <v-icon size="20">fas fa-trash</v-icon>
               </button>
               </v-container>
           </tr>
@@ -72,8 +72,8 @@ export default {
   }
 
   .v-icon {
-    width: 1.5rem;
-    margin-left: .8rem;
+    padding: .5rem;
+   
   }
 
 </style>

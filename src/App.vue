@@ -1,12 +1,13 @@
 <template>
   <v-app  >
     <Header /> 
-
+    
     <v-main>
       <v-container>
-        <form @submit.prevent="saveData()" class="form-container">
-          
+        <form @submit.prevent="saveData()" ref="form" class="form-container">
+
           <v-text-field
+            ref="name"
             v-model="personalData.name"
             label="Nome"
             required
@@ -77,6 +78,8 @@ import Header from './components/shared/header/Header';
 import Footer from './components/shared/footer/Footer';
 import Table from './components/shared/table/Table';
 import Button from './components/shared/button/Button';
+import { mapGetters } from 'vuex';
+import { saveDataMixin, editDataMixin, deleteDataMixin } from './mixins';
 
 export default {
   components: {
@@ -86,69 +89,24 @@ export default {
     Footer
   },
 
-  data(){
+  data() {
     return {
-      editingData : {
-        index: 0,
-        isEditing: false
-      },
-
-      personalData: {
+        personalData: {
         name: '',
         lastName: '',
         email: '',
         telephone: '',
         identity: '',
         legalEntity: false
-      },
-
-      legalEntityVisibility: {
-        cpf: true,
-        cnpj: false
-      },
-
-      savedPersonalData: []
+      }
     }
   },
 
-  methods: {
-    saveData(){
-      if(this.editingData.isEditing){
-        this.savedPersonalData.splice(this.editingData.index, 1, {...this.personalData});
-        this.editingData.isEditing = false;
-      } else {
-        this.savedPersonalData.push({
-          ...this.personalData
-        });
-      }
-
-      this.personalData = {
-        name: '',
-        lastName: '',
-        email: '',
-        telephone: '',
-        cpf: '',
-        cnpj: '',
-        legalEntity: ''
-      }
-    },
-
-    editData(index){
-      this.personalData = {...this.savedPersonalData[index] }
-      this.editingData = {
-        index,
-        isEditing : true,
-      };
-    },
-
-    deleteData(index){
-      this.savedPersonalData.splice(index, 1)
-    }
-  },
-
+  mixins: [ saveDataMixin, editDataMixin, deleteDataMixin ],
+  
   computed: {
-    concatenatedData(){
-      return this.savedPersonalData.map( data =>
+    concatenatedData() {
+      return this.listData.map( data =>
         ({
           name: `${data.name} ${data.lastName}`,
           email: data.email,
@@ -156,7 +114,9 @@ export default {
           identity: data.identity
         })
       )
-    }
+    },
+
+    ...mapGetters([ 'listData', 'legalEntityVisibility' ])
   },
 
   watch: {
