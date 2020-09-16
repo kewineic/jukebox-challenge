@@ -73,10 +73,6 @@ export default {
     transition: .3s;
   }
 
-  .td-handle-content button:hover {
-    opacity: 50%;
-  }
-
   .v-icon {
     padding: .5rem;
    
