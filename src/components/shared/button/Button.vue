@@ -1,7 +1,7 @@
 <template>
-  <v-btn 
+  <v-btn
     large
-    class="ma-2 " 
+    class="ma-2" 
     outlined 
     color="primary"
     :type="buttonType"

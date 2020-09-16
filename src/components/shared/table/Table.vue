@@ -58,7 +58,7 @@ export default {
 
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   .v-data-table {
 
     max-width: 940px;
@@ -69,6 +69,12 @@ export default {
     background: transparent;
     border: none;
     outline: none;
+
+    transition: .3s;
+  }
+
+  .td-handle-content button:hover {
+    opacity: 50%;
   }
 
   .v-icon {

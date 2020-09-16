@@ -4,7 +4,7 @@
     
     <v-main>
       <v-container>
-        <form @submit.prevent="saveData()" ref="form" class="form-container">
+        <v-form @submit.prevent="" ref="form" class="form-container">
 
           <v-text-field
             ref="name"
@@ -38,29 +38,38 @@
             type="checkbox"
           ></v-checkbox>
 
-          <v-text-field
-            v-model="personalData.identity"
-            label="CPF"
-            required
-            v-if="legalEntityVisibility.cpf"
-            v-mask="'###.###.###-##'"
-          ></v-text-field>
+          <div>  
+            <v-text-field
+              v-model.lazy="personalData.identity"
+              label="CPF"
+              required
+              v-if="legalEntityVisibility.cpf"
+              v-mask="'###.###.###-##'"
+              :rules="cpfRules"
+            >
+            </v-text-field>
+          </div>
 
-          <v-text-field
-            v-model="personalData.identity"
-            label="CNPJ"
-            required
-            v-if="legalEntityVisibility.cnpj"
-            v-mask="'##.###.###/####-##'"
-          ></v-text-field>
+          <div>
+            <v-text-field
+              v-model="personalData.identity"
+              label="CNPJ"
+              required
+              v-if="legalEntityVisibility.cnpj"
+              v-mask="'##.###.###/####-##'"
+              :rules="cnpjRules"
+            >
+            </v-text-field>
+          </div>
 
           <v-container>
             <Button
+              @click.native="submitForm"
               buttonType="submit"
               buttonValue="Salvar"
             />
           </v-container>
-        </form>
+        </v-form>
       </v-container>
       
       <v-container>
@@ -82,7 +91,8 @@ import Footer from './components/shared/footer/Footer';
 import Table from './components/shared/table/Table';
 import Button from './components/shared/button/Button';
 import { mapGetters } from 'vuex';
-import { saveDataMixin, editDataMixin, deleteDataMixin } from './mixins';
+import { formDataMixin, editDataMixin, deleteDataMixin } from './mixins';
+import { cpf, cnpj } from 'cpf-cnpj-validator'; 
 
 export default {
   components: {
@@ -101,11 +111,19 @@ export default {
         telephone: '',
         identity: '',
         legalEntity: false
-      }
+      },
+      cpfRules: [v => cpf.isValid(v) || 'CPF inválido: verifique se o número é válido e digite sem traços ou hífens.'],
+      cnpjRules: [v => cnpj.isValid(v) || 'CNPJ inválido: verifique se o número é válido e digite sem traços, hífens e barras.'],
     }
   },
 
-  mixins: [ saveDataMixin, editDataMixin, deleteDataMixin ],
+  methods:{
+    a (){
+      
+    }
+  },
+
+  mixins: [ formDataMixin, editDataMixin, deleteDataMixin ],
   
   computed: {
     concatenatedData() {
@@ -125,11 +143,11 @@ export default {
   watch: {
     'personalData.legalEntity' : function (value) {
       if(value === true) {
-        this.legalEntityVisibility.cpf = false
-        this.legalEntityVisibility.cnpj = true
+        this.legalEntityVisibility.cpf = false;
+        this.legalEntityVisibility.cnpj = true;
       } else {
-        this.legalEntityVisibility.cpf = true
-        this.legalEntityVisibility.cnpj = false
+        this.legalEntityVisibility.cpf = true;
+        this.legalEntityVisibility.cnpj = false;
       }
     }
   }
