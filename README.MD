@@ -1,6 +1,7 @@
 # Desafio Jukebox Agenciamento.
 
-## Vídeo demonstração
+## Teste o aplicativo
+[Aplicativo no GitHub Pages](https://github.com/kewineic/jukebox-challenge)
 
 ## Resumo:
 Teste de Proficiência para a empresa Jukebox Agenciamento utilizando VueJs, Vuex e Vuetify.
