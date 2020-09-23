@@ -79,3 +79,7 @@ export default {
   }
 
 </style>
+
+<style src="./styles.scss" lang="scss" scoped>
+
+</style>

@@ -1,7 +1,8 @@
 <template>
-  <v-btn
+  <v-btn 
     large
     class="ma-2" 
+    id="testing"
     outlined 
     color="primary"
     :type="buttonType"
@@ -25,3 +26,7 @@ export default {
   }
 }
 </script>
+
+<style src="./styles.scss" lang="scss" scoped>
+
+</style>

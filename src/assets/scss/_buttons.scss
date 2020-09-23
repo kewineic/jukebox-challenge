@@ -1,0 +1,10 @@
+@import './colors';
+
+@mixin button-submit {
+  color: $text-white;
+  border-radius: 5px;
+  width: 100px;
+  align-items: center;
+  justify-content: center;
+
+}

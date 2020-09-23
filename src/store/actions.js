@@ -17,4 +17,4 @@ export const actions = {
   deleteData({ commit }, index) {
     commit('DELETE_DATA', index);
   }
-}
+} 

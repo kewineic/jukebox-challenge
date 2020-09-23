@@ -1,0 +1,7 @@
+@import '../../../assets/scss/index.scss';
+
+#testing {
+  background: $cor1;
+
+  @include button-submit;
+}

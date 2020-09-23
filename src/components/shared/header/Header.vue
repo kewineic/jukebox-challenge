@@ -9,3 +9,7 @@
 
   </v-app-bar>
 </template>
+
+<style src="./styles.scss" lang="scss" scoped>
+
+</style>

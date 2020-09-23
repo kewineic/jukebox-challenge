@@ -35,3 +35,7 @@
     </v-container>
   </v-footer>
 </template>
+
+<style src="./styles.scss" lang="scss" scoped>
+
+</style>
