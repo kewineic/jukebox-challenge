@@ -9,7 +9,7 @@ export const actions = {
     }
   },
 
-  updateData({ commit }, index) {
+  updateData({ commit }, index) { 
     commit('SET_DATA_EDITING_INDEX', index);
     commit('SET_DATA_EDITING', true);
   },
